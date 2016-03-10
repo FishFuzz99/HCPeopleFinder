@@ -1,0 +1,42 @@
+﻿<UserControl x:Class="HealthCatalystPeopleSearch.Views.PeopleListView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:HealthCatalystPeopleSearch.Views"
+             xmlns:med="clr-namespace:HealthCatalystPeopleSearch;assembly="
+             mc:Ignorable="d" 
+             d:DesignHeight="750" d:DesignWidth="750">
+    <UserControl.Resources>
+        <med:ImageConverter x:Key="imageConverter" />
+    </UserControl.Resources>
+    <Grid>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+           
+        </Grid.ColumnDefinitions>
+
+        <DataGrid x:Name="People"  AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" Grid.Row="1">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding firstName}" Header="First Name" />
+                <DataGridTextColumn Binding="{Binding lastName}" Header="Last Name" />
+                <DataGridTextColumn Binding="{Binding address}" Header="Address" />
+                <DataGridTextColumn Binding="{Binding age}" Header="Age" />
+                <DataGridTextColumn Binding="{Binding interests}" Header="Interests" />
+                <DataGridTemplateColumn Header="Picture" Width="SizeToCells" >
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding image, Converter={StaticResource imageConverter}}" MaxHeight="100" MaxWidth="100" MinHeight="64" MinWidth="64" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Content="Add New Person" x:Name="NewPerson" Grid.Row="2"/>
+    </Grid>
+</UserControl>
