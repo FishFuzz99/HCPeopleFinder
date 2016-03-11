@@ -4,9 +4,20 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:HealthCatalystPeopleSearch.Views"
+             xmlns:med="clr-namespace:HealthCatalystPeopleSearch;assembly="
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
+        <Grid.Resources>
+            <med:ImageConverter x:Key="imageConverter" />
+                <Style x:Name="textBoxStyle" TargetType="TextBox">
+                <Setter Property="Margin" Value="3" />
+                <Setter Property="VerticalContentAlignment" Value="Center" />
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="BorderBrush" Value="DimGray" />
+                <Setter Property="BorderThickness" Value="1.5" />
+            </Style>
+        </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -14,7 +25,10 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -29,14 +43,18 @@
         <Label Grid.Row="4" Grid.Column="0">Intrests</Label>
         <Label Grid.Row="5" Grid.Column="0">Picture</Label>
 
-        <TextBox x:Name="FirstName" Grid.Row="0" Grid.Column="1"></TextBox>
-        <TextBox x:Name="LastName" Grid.Row="1" Grid.Column="1"></TextBox>
-        <TextBox x:Name="Age" Grid.Row="2" Grid.Column="1"></TextBox>
-        <TextBox x:Name="Address" Grid.Row="3" Grid.Column="1"></TextBox>
-        <TextBox x:Name="Interests" Grid.Row="4" Grid.Column="1"></TextBox>
+        <TextBox x:Name="firstName" Grid.Row="0" Grid.Column="1"></TextBox>
+        <TextBox x:Name="lastName" Grid.Row="1" Grid.Column="1"></TextBox>
+        <TextBox x:Name="age" Grid.Row="2" Grid.Column="1" PreviewTextInput="PreviewTextInput"></TextBox>
+        <TextBox x:Name="address" Grid.Row="3" Grid.Column="1"></TextBox>
+        <TextBox x:Name="interests" Grid.Row="4" Grid.Column="1"></TextBox>
 
-
-        <Grid Grid.ColumnSpan="2" Grid.Row="7">
+        <Image x:Name="image" Grid.Row="5"  Grid.Column="1" Source="{Binding image, Converter={StaticResource imageConverter}}" RenderOptions.BitmapScalingMode="HighQuality" MaxHeight="275" MaxWidth="200" />
+        
+        <Button x:Name="Browse" Grid.Row="6" Grid.Column="0" Content="Browse" Margin="2"/>
+        
+        <Label Grid.Row="7" Grid.ColumnSpan="2" x:Name="message" HorizontalContentAlignment="Center" Content="" />
+        <Grid Grid.ColumnSpan="2" Grid.Row="9">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="2*" />
@@ -44,8 +62,8 @@
                 <ColumnDefinition Width="2*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Button Grid.Row="0" Grid.Column="1"  >Cancel</Button>
-            <Button Grid.Row="0" Grid.Column="3" >Add New Person</Button>
+            <Button Grid.Row="0" Grid.Column="1" x:Name="Cancel" IsCancel="True" >Cancel</Button>
+            <Button Grid.Row="0" Grid.Column="3" x:Name="AddNewPerson" IsDefault="True">Add New Person</Button>
         </Grid>
         
         

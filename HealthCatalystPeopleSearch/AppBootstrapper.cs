@@ -17,8 +17,9 @@ namespace HealthCatalystPeopleSearch {
 
             container.Singleton<IWindowManager, WindowManager>();
             container.Singleton<IEventAggregator, EventAggregator>();
-            container.PerRequest<MainViewModel>();
+            container.Singleton<MainViewModel>();
             container.Singleton<PeopleContext>();
+
         }
 
         protected override object GetInstance(Type service, string key) {

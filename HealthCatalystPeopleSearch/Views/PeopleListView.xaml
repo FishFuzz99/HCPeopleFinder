@@ -9,6 +9,17 @@
              d:DesignHeight="750" d:DesignWidth="750">
     <UserControl.Resources>
         <med:ImageConverter x:Key="imageConverter" />
+        <Style x:Name="dataGridStyle" TargetType="DataGrid">
+            <Setter Property="AlternatingRowBackground" Value="#d3d3d3" />
+           
+        </Style>
+        <Style x:Name="dataGridHeaderStyle" TargetType="DataGridColumnHeader" >
+            <Setter Property="MinWidth" Value="75" />
+        </Style>
+        <Style x:Name="dataGridCellStyle" TargetType="DataGridCell">
+            <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+        </Style>
+
     </UserControl.Resources>
     <Grid>
         
@@ -20,23 +31,41 @@
         <Grid.ColumnDefinitions>
            
         </Grid.ColumnDefinitions>
-
-        <DataGrid x:Name="People"  AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" Grid.Row="1">
+        <Grid Grid.Row="0" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="8*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="1" Content="Search" x:Name="Search" IsDefault="True" Margin="2 2 2 5"/>
+            <TextBox Grid.Column="3" x:Name="searchValues" Margin="2 2 2 5"/>
+        </Grid>
+        <DataGrid x:Name="people"  AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" Grid.Row="1">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding firstName}" Header="First Name" />
                 <DataGridTextColumn Binding="{Binding lastName}" Header="Last Name" />
                 <DataGridTextColumn Binding="{Binding address}" Header="Address" />
                 <DataGridTextColumn Binding="{Binding age}" Header="Age" />
                 <DataGridTextColumn Binding="{Binding interests}" Header="Interests" />
-                <DataGridTemplateColumn Header="Picture" Width="SizeToCells" >
+                <DataGridTemplateColumn Header="Picture" Width="SizeToCells" MinWidth="75" >
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Image Source="{Binding image, Converter={StaticResource imageConverter}}" MaxHeight="100" MaxWidth="100" MinHeight="64" MinWidth="64" />
+                            <Image Source="{Binding image, Converter={StaticResource imageConverter}}" MaxHeight="100" MaxWidth="100" MinHeight="44" MinWidth="44" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="Add New Person" x:Name="NewPerson" Grid.Row="2"/>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5*" />
+
+                <ColumnDefinition Width="3*" />
+            </Grid.ColumnDefinitions>
+            <Label x:Name="Message" Grid.Column="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+            <Button Content="Add New Person" x:Name="NewPerson" Grid.Column="1" Margin="10"/>
+        </Grid>
     </Grid>
 </UserControl>

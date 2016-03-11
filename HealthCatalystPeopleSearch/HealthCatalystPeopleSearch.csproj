@@ -101,6 +101,10 @@
     <Compile Include="Migrations\201603090401555_v4.Designer.cs">
       <DependentUpon>201603090401555_v4.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201603110444292_nullable int.cs" />
+    <Compile Include="Migrations\201603110444292_nullable int.Designer.cs">
+      <DependentUpon>201603110444292_nullable int.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\IPeopleRepository.cs" />
     <Compile Include="Models\PeopleContext.cs" />
@@ -162,6 +166,9 @@
     <EmbeddedResource Include="Migrations\201603090401555_v4.resx">
       <DependentUpon>201603090401555_v4.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603110444292_nullable int.resx">
+      <DependentUpon>201603110444292_nullable int.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -175,9 +182,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\dogPicture.bmp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="female1.jpg" />

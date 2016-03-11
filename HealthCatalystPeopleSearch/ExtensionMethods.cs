@@ -24,5 +24,20 @@ namespace HealthCatalystPeopleSearch
             image.Save(memoryStream, System.Drawing.Imaging.ImageFormat.Png);
             return memoryStream.ToArray();
         }
+
+        public static bool ContainsAny(this string str, params string[] arrValues)
+        {
+            if (!string.IsNullOrEmpty(str) || arrValues.Length > 0)
+            {
+                foreach (string value in arrValues)
+                {
+                    if (str.ToLower().Contains(value.ToLower()))
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
     }
 }

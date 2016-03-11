@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HealthCatalystPeopleSearch.Models
 {
@@ -18,9 +13,9 @@ namespace HealthCatalystPeopleSearch.Models
         [Required]
         public string lastName { get; set; }
         public string address { get; set; }
-        public int age { get; set; }
+        public int? age { get; set; }
         public string interests { get; set; }
-        public byte[] byteArr { get; set; } // todo: handle the picture
+        public byte[] byteArr { get; set; } 
         [NotMapped]
         public Image image { get; set; }
     }

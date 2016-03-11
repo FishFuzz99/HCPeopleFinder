@@ -2,9 +2,7 @@
 using System.Threading.Tasks;
 using System.Data.Entity;
 using System.Collections.ObjectModel;
-using System.IO;
-using System.Drawing;
-
+using System;
 
 namespace HealthCatalystPeopleSearch.Models
 {
@@ -26,32 +24,38 @@ namespace HealthCatalystPeopleSearch.Models
         }
      
 
-        public async Task<ObservableCollection<Person>> getPeopleAsync(string firstName = null, string lastName = null)
+        public async Task<ObservableCollection<Person>> getPeopleAsync()
         {
-            using (_context)
+            try
             {
                 var People = await (from a in _context.People
-                                    //where a.firstName.Contains(firstName) && a.lastName.Contains(lastName)
                                     select a).ToListAsync();
 
-                People.ForEach(p => p.image = p.byteArr.ConvertByteArrToImage());
+                People.ForEach(p => p.image = p.byteArr?.ConvertByteArrToImage());
 
                 return new ObservableCollection<Person>(People);
             }
+            catch (Exception e)
+            {
+                throw new ApplicationException("Failed to get people from the database", e);
+            }
+            
         }
 
 
 
         public async Task addPersonAsync(Person newPerson)
         {
-            _context.People.Add(newPerson);
-            await _context.SaveChangesAsync();
-        }
-
-        public async Task removePersonAsync(Person person)
-        {
-            _context.People.Remove(person);
-            await _context.SaveChangesAsync();
+            try
+            {
+                newPerson.byteArr = newPerson.image.ConvertImageToByteArr();
+                _context.People.Add(newPerson);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException("Failed to add person.", e);
+            }
         }
     }
 }
